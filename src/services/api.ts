@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import type { Product, CartItem, Order, Review, Category, User, Address, Notification, Coupon } from '../types';
+import type { Product, CartItem, Order, Review, Category, User, Address, NotificationItem, Coupon } from '../types';
 
 const FUNCTIONS_URL = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
 

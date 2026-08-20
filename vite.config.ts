@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   
   return {
     plugins: [react(), tailwindcss()],
+    base: '/',  // Critical for Render deployment
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

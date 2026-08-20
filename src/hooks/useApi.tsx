@@ -251,11 +251,11 @@ export function useRemoveFromWishlist() {
 }
 
 // Reviews hooks
-export function useReviews(params: ReviewListParams) {
+export function useReviews(productId: string, params?: { page?: number; limit?: number }) {
   return useQuery({
-    queryKey: ['reviews', params],
-    queryFn: () => api.reviews.list(params),
-    enabled: !!params.product_id,
+    queryKey: ['reviews', productId, params],
+    queryFn: () => api.reviews.list(productId, params),
+    enabled: !!productId,
   });
 }
 

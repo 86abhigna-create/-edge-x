@@ -7,20 +7,15 @@ export interface VariantStock {
 export interface ProductImage {
   id: string;
   product_id: string;
-  productId?: string;
   url: string;
   alt_text?: string;
-  altText?: string;
   is_primary: boolean;
-  isPrimary?: boolean;
   sort_order: number;
-  sortOrder?: number;
 }
 
 export interface ProductVariant {
-  id: string;
-  product_id: string;
-  productId?: string;
+  id?: string;
+  product_id?: string;
   color: string;
   size: string;
   stock: number;
@@ -33,15 +28,10 @@ export interface Category {
   slug: string;
   description?: string;
   image_url?: string;
-  imageUrl?: string;
   sort_order: number;
-  sortOrder?: number;
   is_active: boolean;
-  isActive?: boolean;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
 }
 
 export interface Product {
@@ -54,8 +44,7 @@ export interface Product {
   discount_percent: number;
   discountPercent?: number;
   category_id?: string;
-  categoryId?: string;
-  category?: Category;
+  category?: Category | string;
   description?: string;
   materials: string[];
   colorway: string;
@@ -68,69 +57,82 @@ export interface Product {
   published: boolean;
   featured: boolean;
   meta_title?: string;
-  metaTitle?: string;
   meta_description?: string;
-  metaDescription?: string;
+  image?: string;
   images?: ProductImage[];
   variants?: ProductVariant[];
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
   // Legacy/computed properties
   image?: string;
-  image?: string;
   altText?: string;
+  tagline?: string;
+  badge?: 'New' | 'Limited' | 'Sold Out' | 'Sale';
   discountPercent?: number;
-  stockCount?: number;
   inStock?: boolean;
+  stockCount?: number;
+  published?: boolean;
+  variants?: ProductVariant[];
+}
+
+export interface ProductVariant {
+  id?: string;
+  product_id?: string;
+  color: string;
+  size: string;
+  stock: number;
+  sku?: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  image_url?: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface CartItem {
   id: string;
   user_id: string;
-  userId?: string;
   product_id: string;
-  productId?: string;
   variant_id?: string;
-  variantId?: string;
   quantity: number;
   selected_size: string;
-  selectedSize?: string;
   selected_color?: string;
-  selectedColor?: string;
   product?: Product;
-  cartItemId?: string;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
+  // Legacy/computed
+  cartItemId?: string;
+  selectedSize?: string;
+  selectedColor?: string;
 }
 
 export interface WishlistItem {
   id: string;
   user_id: string;
-  userId?: string;
   product_id: string;
-  productId?: string;
   product?: Product;
   created_at: string;
-  createdAt?: string;
+  dateAdded?: string;
 }
 
 export interface NotificationItem {
   id: string;
   user_id: string;
-  userId?: string;
   type: string;
   title: string;
   message: string;
   data?: Record<string, any>;
   read: boolean;
   read_at?: string;
-  readAt?: string;
   created_at: string;
-  createdAt?: string;
+  date?: string;
 }
 
 export interface Review {
@@ -146,17 +148,14 @@ export interface Review {
   comment?: string;
   status: 'Published' | 'Pending' | 'Flagged' | 'Rejected';
   is_verified_purchase: boolean;
-  isVerifiedPurchase?: boolean;
   helpful_count: number;
-  helpfulCount?: number;
   user?: { id: string; full_name?: string; avatar_url?: string };
+  productName?: string;
   productName?: string;
   userName?: string;
   date?: string;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
 }
 
 export interface OrderItemSnapshot {
@@ -178,6 +177,7 @@ export interface OrderItemSnapshot {
   selected_color?: string;
   selectedColor?: string;
   total: number;
+  selectedSize?: string;
 }
 
 export type OrderStatus =
@@ -205,11 +205,8 @@ export interface Order {
   status: OrderStatus;
   subtotal: number;
   tax_amount: number;
-  taxAmount?: number;
   shipping_amount: number;
-  shippingAmount?: number;
   discount_amount: number;
-  discountAmount?: number;
   total: number;
   currency: string;
   payment_method?: string;
@@ -218,7 +215,6 @@ export interface Order {
   paymentIntentId?: string;
   shipping_address: {
     full_name: string;
-    fullName?: string;
     phone?: string;
     street: string;
     apartment?: string;
@@ -239,7 +235,6 @@ export interface Order {
   };
   billing_address?: {
     full_name: string;
-    fullName?: string;
     phone?: string;
     street: string;
     apartment?: string;
@@ -276,16 +271,14 @@ export interface Order {
   items?: OrderItemSnapshot[];
   itemSnapshots?: OrderItemSnapshot[];
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
+  orderId?: string;
   date?: string;
 }
 
 export interface Address {
   id: string;
   user_id: string;
-  userId?: string;
   type: 'shipping' | 'billing';
   full_name: string;
   fullName?: string;
@@ -299,9 +292,7 @@ export interface Address {
   is_default: boolean;
   isDefault?: boolean;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
 }
 
 export interface Coupon {
@@ -323,15 +314,11 @@ export interface Coupon {
   per_user_limit: number;
   perUserLimit?: number;
   valid_from: string;
-  validFrom?: string;
   valid_until?: string;
-  validUntil?: string;
   is_active: boolean;
   isActive?: boolean;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
 }
 
 export interface User {
@@ -344,9 +331,7 @@ export interface User {
   avatar_url?: string;
   avatarUrl?: string;
   created_at: string;
-  createdAt?: string;
   updated_at: string;
-  updatedAt?: string;
 }
 
 export interface PaginationParams {
@@ -369,6 +354,7 @@ export interface OrderListParams extends PaginationParams {
 
 export interface ReviewListParams extends PaginationParams {
   product_id: string;
+  productId?: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -395,4 +381,29 @@ export type ActiveTab = 'shop' | 'orders' | 'cart' | 'profile' | 'owner-dashboar
 
 export interface ApiError {
   error: string;
+}
+
+export interface Notification {
+  id: string;
+  user_id: string;
+  type: string;
+  title: string;
+  message: string;
+  data?: Record<string, any>;
+  read: boolean;
+  read_at?: string;
+  created_at: string;
+}
+
+export interface NotificationItem {
+  id: string;
+  user_id: string;
+  type: string;
+  title: string;
+  message: string;
+  data?: Record<string, any>;
+  read: boolean;
+  read_at?: string;
+  created_at: string;
+  date?: string;
 }
